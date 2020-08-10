@@ -1,0 +1,269 @@
+    # <https://www.dartlang.org/guides/language/analysis-options>
+    #
+    # Specify analysis options.
+    #
+    # Until there are meta linter rules, each desired lint must be explicitly enabled.
+    # See: https://github.com/dart-lang/linter/issues/288
+    #
+    # For a list of lints, see: http://dart-lang.github.io/linter/lints/
+    # See the configuration guide for more
+    # https://github.com/dart-lang/sdk/tree/master/pkg/analyzer#configuring-the-analyzer
+    #
+    # There are other similar analysis options files in the flutter repos,
+    # which should be kept in sync with this file:
+    #
+    #   - analysis_options.yaml (this file)
+    #     https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+    #   - packages/flutter/lib/analysis_options_user.yaml
+    #   - https://github.com/flutter/plugins/blob/master/analysis_options.yaml
+    #   - https://github.com/flutter/engine/blob/master/analysis_options.yaml
+    #
+    # This file contains the analysis options used by Flutter tools, such as IntelliJ,
+    # Android Studio, and the `flutter analyze` command.
+
+analyzer:
+  strong-mode:
+    # 暗黙的なキャストを許可しない(false)
+    implicit-casts: false
+    # 動的型付けを許可しない(false)
+    #implicit-dynamic: false (707-Tuan)
+  errors:
+    # パラメータが不十分ではない場合、警告として扱われる
+    missing_required_param: warning
+    # 「return」がない場合、警告として扱われる
+    missing_return: warning
+    # コードの中に「TODOs 」宣言することを許可する
+    todo: ignore
+    #FutureやStreamまたは「dart:async」を利用する場合、[pubspecs]のアップデートにAnalyzerのヒントを無視する
+    #詳しくは https://github.com/flutter/flutter/pull/24528 
+    sdk_version_async_exported_from_core: ignore
+  exclude:
+    - 'bin/cache/**'
+    # the following two are relative to the stocks example and the flutter package respectively
+    # see https://github.com/dart-lang/sdk/issues/28463
+    - 'lib/i18n/stock_messages_*.dart'
+    - 'lib/src/http/**'
+
+linter:
+  rules:
+    # these rules are documented on and in the same order as
+    # the Dart Lint rules page to make maintenance easier
+    # https://github.com/dart-lang/linter/blob/master/example/all.yaml
+    # 戻り値のデータ型を定義しないといけない
+    - always_declare_return_types
+    # コントロールステートメントを定義する場合、新しい行にしないといけない
+    - always_put_control_body_on_new_line
+    # - always_put_required_named_parameters_first # we prefer having parameters in the same order as fields https://github.com/flutter/flutter/issues/10219
+    # [assert]を利用する場合、デフォルト値のないパラメータに「@require」を宣言しなければならない
+    - always_require_non_null_named_parameters
+    # 特定なデータ型を定義しないといけない
+    #- always_specify_types (707-tuan)
+    # オーバーライドすれば、アノテーションを宣言しなければならない
+    - annotate_overrides
+    # - avoid_annotating_with_dynamic # conflicts with always_specify_types
+    # 「as」を利用させない
+    #- avoid_as (707-tuan)
+    # - avoid_bool_literals_in_conditional_expressions # not yet tested
+    # - avoid_catches_without_on_clauses # we do this commonly
+    # - avoid_catching_errors # we do this commonly
+    # スタティックメンバーしかもっていないクラスを定義させない
+    - avoid_classes_with_only_static_members
+    # - avoid_double_and_int_checks # only useful when targeting JS runtime
+    # 空elseブロックを定義させない
+    - avoid_empty_else
+    # クラスメンバをconstクラスで初期化させない。
+    - avoid_field_initializers_in_const_classes
+    # リスト、配列などに「foreach」を利用させない
+    - avoid_function_literals_in_foreach_calls
+    # - avoid_implementing_value_types # not yet tested
+    #初期化時に「NULL」を代入させない
+    - avoid_init_to_null
+    # - avoid_js_rounded_ints # only useful when targeting JS runtime
+    #カスタマイズ「==」オペレータにNULLチェックしない
+    - avoid_null_checks_in_equality_operators
+    # - avoid_positional_boolean_parameters # not yet tested
+    # - avoid_private_typedef_functions # we prefer having typedef (discussion in https://github.com/flutter/flutter/pull/16356)
+    # 相対パスでライブラリをインポートさせない
+    - avoid_relative_lib_imports
+    # オーバーライドメソッドのパラメータ名を変更させない
+    - avoid_renaming_method_parameters
+    # 「set」メソッドに戻りタイプを宣言させない
+    - avoid_return_types_on_setters
+    # - avoid_returning_null # there are plenty of valid reasons to return null
+    # - avoid_returning_null_for_future # not yet tested
+    # メソッドの戻りデータタイプが「void」であれば、「return null」をしてはいけない
+    - avoid_returning_null_for_void
+    # - avoid_returning_this # there are plenty of valid reasons to return this
+    # - avoid_setters_without_getters # not yet tested
+    # - avoid_shadowing_type_parameters # not yet tested
+    # - avoid_single_cascade_in_expression_statements # not yet tested
+    # dart:io パッケージの async専用ではないメソッドを利用させない
+    - avoid_slow_async_io
+    # パラメータ名を既存データ型名にさせない
+    - avoid_types_as_parameter_names
+    # - avoid_types_on_closure_parameters # conflicts with always_specify_types
+    # 必要のない、利用しないコンストラクタのパラメータをさせない
+    - avoid_unused_constructor_parameters
+    # 「async」メソッドの戻り値に「void」で宣言させない
+    - avoid_void_async
+    # 「await」で宣言する場合、戻り値のデータ型が「Future」でなければならない
+    - await_only_futures
+    # リソースの名を宣言する場合、「UpperCamelCase」規則でしなければならない
+    - camel_case_types
+    # メモリリークまた予想外の動きを避けるため、dart.async.StreamSubscriptionのインスタンスにキャンセルを実行する
+    - cancel_subscriptions
+    # - cascade_invocations # not yet tested
+    # - close_sinks # not reliable enough
+    # - comment_references # blocked on https://github.com/flutter/flutter/issues/20765
+    # - constant_identifier_names # needs an opt-out https://github.com/dart-lang/linter/issues/204
+    # プロセスの流れをコントロールする命令、returnなどをFinallyブロックに定義させない
+    - control_flow_in_finally
+    # - curly_braces_in_flow_control_structures # not yet tested
+    # 「Effective Dart Guide」の規則に沿って行わないといけない。「dart:」インポートを先頭に置かなければならない
+    - directives_ordering
+    # 空Catchブロックを定義させない
+    - empty_catches
+    # 中身のないコンストラクタを定義させない
+    - empty_constructor_bodies
+    # 空ステートメントをさせない
+    - empty_statements
+    # - file_names # not yet tested
+    # FlutterのTODO宣言スタイルを利用しないといけない
+    - flutter_style_todos
+    # 「==」がオーバーライドする場合、[hashCode]もオーバーライド
+    - hash_and_equals
+    # 他のパッケージの実装ファイルをインポートさせない
+    - implementation_imports
+    # - invariant_booleans # too many false positives: https://github.com/dart-lang/linter/issues/811
+    # Iterableを実行する場合、コレクションのデータ型と異なるインスタンスにcontainsをさせない
+    - iterable_contains_unrelated_type
+    # - join_return_with_assignment # not yet tested
+    # 「lowercase_with_underscores」規則でライブラリ名を宣言しないといけない
+    - library_names
+    # 「lowercase_with_underscores」規則でライブラリのPrefixを宣言しないといけない
+    - library_prefixes
+    # - lines_longer_than_80_chars # not yet tested
+    # 「list」のデータ型と違うエレメントに「remove」実行させない
+    - list_remove_unrelated_type
+    # - literal_only_boolean_expressions # too many false positives: https://github.com/dart-lang/sdk/issues/34181
+    # 「list文字列」を宣言し、初期化時に文字列を結合する場合に結合オペレーターを利用しなければならない
+    - no_adjacent_strings_in_list
+    # 同じCaseを定義させない
+    - no_duplicate_case_values
+    # 「lowerCamelCase」規則で「const」ではない変数,インスタンスなどを宣言しないといけない
+    - non_constant_identifier_names
+    # - null_closures  # not yet tested
+    # - omit_local_variable_types # opposite of always_specify_types
+    # - one_member_abstracts # too many false positives
+    # - only_throw_errors # https://github.com/flutter/flutter/issues/5792
+    # クラスのフィルドをオーバーライドしてはいけない
+    - overridden_fields
+    # 「public API」にすべて「doc comment」スタイルを宣言しないといけない
+    - package_api_docs
+    #「lowercase_with_underscores」規則でパッケージ名を定義しなければならない
+    - package_names
+    #「library」名前のprefixを宣言する場合、パッケージ名を書かないといけない。また、ドットで区別しなければならない。
+    - package_prefixed_library_names
+    # - parameter_assignments # we do this commonly
+    # 文字列を繋ぐ場合に、「＋」記号を利用してはいけない
+    - prefer_adjacent_string_concatenation
+    # コンストラクタのボディー(｛｝)に「assert」を宣言してはいけない。リダイレクトコンストラクタの場合は宣言できる
+    - prefer_asserts_in_initializer_lists
+    # 「collection(list,map,set)」型を利用する場合に、データ型を省略しなければならない
+    - prefer_collection_literals
+    # メソッドの戻り値がNULLかどうかを確認する場合に「??=」オペレーターを利用しなければならない
+    - prefer_conditional_assignment
+    # インスタンスを作成する場合、クラスのコンストラクタは「const 」のであれば、「const」をしなければならない
+    #- prefer_const_constructors (707-Tuan)
+    # 「const コンストラクタ」を定義する場合に、アノテーション「@immutable」を利用しなければならない
+    - prefer_const_constructors_in_immutables
+    # 「const」変数、メソッドなどを宣言すれば、初期化も「const」を利用しなければならない
+    - prefer_const_declarations
+    # 変更できないクラスのフィルドに「collection(list,map,set)」データ型の初期化時にパラメータを宣言する場合「const」を利用しなければならない
+    - prefer_const_literals_to_create_immutables
+    # - prefer_constructors_over_static_methods # not yet tested
+    # エレメントがあるコレクションを閲覧するため、「indexOf」を利用してはいけない
+    - prefer_contains
+    # 変数の名前とデフォルトを区別するに「：」の代わりに「=」を利用しなければならない
+    - prefer_equal_for_default_values
+    # - prefer_expression_function_bodies # conflicts with https://github.com/flutter/flutter/wiki/Style-guide-for-Flutter-repo#consider-using--for-short-functions-and-methods
+    # クラスのプライベートフィルドは「final」で宣言しなければならない
+    - prefer_final_fields
+    # ローカル変数の内容を変更しない場合、「final」で宣言しなければならない
+    - prefer_final_locals
+    # コレクションを閲覧するため、「for」のわかりに「foreach」を利用しなければならない
+    - prefer_foreach
+    # - prefer_function_declarations_over_variables # not yet tested
+    # ジェネリックメソッドの宣言にエイリアスで定義しなければならない
+    - prefer_generic_function_type_aliases
+    # コンストラクタを定義する場合にDartの省略スタイルで定義しなければならない
+    - prefer_initializing_formals
+    # - prefer_int_literals # not yet tested
+    # - prefer_interpolation_to_compose_strings # not yet tested
+    # コレクションが空であれば、「length」を利用してはいけない。「isEmpty,isNotEmpty」を推奨する
+    - prefer_is_empty
+    # 「Collection(Iterable,Map」のインスタンスを空かどうか確認する場合に、「x.isNotEmpty」のかわりに「!x.isEmpty」を推奨する
+    - prefer_is_not_empty
+    # 「iterable.where((e) => e is T)」の代わりに「iterable.whereType<T>()」を推奨する
+    - prefer_iterable_whereType
+    # - prefer_mixin # https://github.com/dart-lang/language/issues/32
+    # 文字列に「エスケープ」などを行わない場合、シングルクォーテーションを利用しなければならない
+    - prefer_single_quotes
+    # 初期化されない変数、フィルドなどに特定的なデータタイプを宣言しなければならない
+    - prefer_typing_uninitialized_variables
+    # 戻りデータ型にNULLを設定させない（Future<null>….など）。
+    - prefer_void_to_null
+    # - public_member_api_docs # enabled on a case-by-case basis; see e.g. packages/analysis_options.yaml
+    # 再起的の「getter」を定義してはいけない
+    - recursive_getters
+    # 「doc comment - ///」を利用しなければならない
+    - slash_for_doc_comments
+    # コンストラクタはクラスのボディーの先頭に定義しなければならない
+    #- sort_constructors_first (707-Tuan)
+    # 「pubspec.yaml」で定義された「dependencies」を並び替える
+    - sort_pub_dependencies
+    # 名前のないコンストラクタはクラスのボディーの先頭に定義しなければならない
+    - sort_unnamed_constructors_first
+    # - super_goes_last # no longer needed w/ Dart 2
+    # 「==(Object other)」命令を利用する場合、データ型またNULLチェックを行わなければならない
+    - test_types_in_equals
+    # Finallyブロックに「Throw」を宣言させない
+    - throw_in_finally
+    # - type_annotate_public_apis # subset of always_specify_types
+    # Dartスタイルでコンストラクタを定義する場合、データタイプを宣言してはいけない
+    - type_init_formals
+    # - unawaited_futures # too many false positives
+    # - unnecessary_await_in_return # not yet tested
+    # 「${変数}」が必要のないとき利用させない
+    - unnecessary_brace_in_string_interps
+    # 必要のない「const」キーワードを利用させない
+    - unnecessary_const
+    # 必要のない「getter/setter」を定義させない
+    - unnecessary_getters_setters
+    # - unnecessary_lambdas # has false positives: https://github.com/dart-lang/linter/issues/498
+    # 必要のない「new」キーワードを利用させない
+    - unnecessary_new
+    # 必要のないNULLチェックオペレーター「??」を定義させない（x ??= null)
+    - unnecessary_null_aware_assignments
+    # nullチェック条件式に確認値としてnullを利用させない。そのかわりに「nullチェックオペレーター(??)」を利用する
+    - unnecessary_null_in_if_null_operators
+    # 親クラスと同じ処理のオーバーライドメソッドを定義させない。必要のないオーバーライドをチェックする
+    - unnecessary_overrides
+    # 必要のない括弧を定義させない
+    - unnecessary_parenthesis
+    # 必要のないステートメントを宣言させない
+    - unnecessary_statements
+    # 必要のない「this」を定義させない
+    - unnecessary_this
+    # 同じデータ型ではない場合、比較条件実行させない
+    - unrelated_type_equality_checks
+    # - use_function_type_syntax_for_parameters # not yet tested
+    # キャッチされたExceptionにもう一度投げる場合「rethrow」を利用しなければならない
+    - use_rethrow_when_possible
+    # - use_setters_to_change_properties # not yet tested
+    # - use_string_buffers # has false positives: https://github.com/dart-lang/sdk/issues/34182
+    # - use_to_and_as_if_applicable # has false positives, so we prefer to catch this by code-review
+    # 正しいRegパータンをチェックする
+    - valid_regexps
+    # - void_checks # not yet tested
+

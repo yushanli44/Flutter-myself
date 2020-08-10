@@ -1,0 +1,61 @@
+[
+  {
+    "key": "TODAY",
+    "defaultOrder": 1,
+    "currentOrder": 1
+  },
+  {
+    "key": "VIPCustomer",
+    "defaultOrder": 2,
+    "currentOrder": 0
+  },
+  {
+    "key": "CustomerInfo",
+    "defaultOrder": 3,
+    "currentOrder": 2
+  },
+  {
+    "key": "CustomerSearch",
+    "defaultOrder": 4,
+    "currentOrder": 0
+  },
+  {
+    "key": "Information",
+    "defaultOrder": 5,
+    "currentOrder": 3
+  },
+  {
+    "key": "CaseSearch",
+    "defaultOrder": 6,
+    "currentOrder": 0
+  },
+  {
+    "key": "CourseInfo",
+    "defaultOrder": 7,
+    "currentOrder": 0
+  },
+  {
+    "key": "CourseSearch",
+    "defaultOrder": 8,
+    "currentOrder": 0
+  },
+  {
+    "key": "Schedule",
+    "defaultOrder": 9,
+    "currentOrder": 0
+  },
+  {
+    "key": "Notice",
+    "defaultOrder": 10,
+    "currentOrder": 4
+  },
+  {
+    "key": "Setting",
+    "defaultOrder": 11,
+    "currentOrder": 0
+  }
+]
+
+
+
+

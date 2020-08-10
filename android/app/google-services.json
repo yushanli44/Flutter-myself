@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "118572474575",
+    "firebase_url": "https://crmmobile-1e2c9.firebaseio.com",
+    "project_id": "crmmobile-1e2c9",
+    "storage_bucket": "crmmobile-1e2c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118572474575:android:47cf31b35b342c4ae097ba",
+        "android_client_info": {
+          "package_name": "jp.co.oas.crm_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118572474575-un4ln2ngq1gbq1h4vjf6depmftqho3vs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeEttsdxyPixkJ0bHt6ga7oK91EGRw8rE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118572474575-un4ln2ngq1gbq1h4vjf6depmftqho3vs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "118572474575-qof2qfjoqt7sv0sc542vp99u9q5bhejp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "jp.co.oas.flutter.crmmobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
